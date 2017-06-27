@@ -12,12 +12,17 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+import static android.widget.Toast.LENGTH_LONG;
 
+public class MainActivity extends AppCompatActivity {
+    String [] applist = new String[100];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        applist[0] = new String("com.kakao.talk");
 
         Button b1 = (Button) findViewById(R.id.button1); //서비스 종료
         Button b2 = (Button) findViewById(R.id.button2); //서비스 시작
@@ -27,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "액티비티 전환", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "액티비티 전환", LENGTH_LONG).show();
 
                 // 액티비티 전환 코드
                 Intent intent = new Intent(getApplicationContext(), map.class);
@@ -70,16 +75,24 @@ public class MainActivity extends AppCompatActivity {
         List<ActivityManager.RunningServiceInfo> service_info = activity_manager.getRunningServices(100);
 
         for(int i=0; i<service_info.size(); i++) {
-            Log.v("service", "Service: " + service_info.get(i).service.getPackageName() + ", className: " + service_info.get(i).service.getClassName());
+            //Log.v("service", "Service: " + service_info.get(i).service.getPackageName() + ", className: " + service_info.get(i).service.getClassName());
 
-            Log.v("pid,uid", "PID/UID: " + service_info.get(i).pid + "/" + service_info.get(i).uid + "  process: " + service_info.get(i).process);
+            //Log.v("pid,uid", "PID/UID: " + service_info.get(i).pid + "/" + service_info.get(i).uid + "  process: " + service_info.get(i).process);
+            if(service_info.get(i).service.getPackageName().equals("com.kakao.talk")){
+//                Toast.makeText(this, "카톡실행확인됨", Toast.LENGTH_LONG).show();
+                Log.v("yes", "kakaotalk yes");
+            }
         }
 
+
     }
+
+
 
     class myThread extends Thread{
         public void run() {
             while (true) {
+                //Toast.makeText(this, "돌고있음", LENGTH_LONG).show();
                 getServiceList();
             }
         }
