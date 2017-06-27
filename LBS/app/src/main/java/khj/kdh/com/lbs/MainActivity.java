@@ -83,8 +83,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.v("yes", "kakaotalk yes");
             }
         }
-
-
     }
 
 
