@@ -66,6 +66,8 @@ public class map extends AppCompatActivity
         private AppCompatActivity mActivity;
         boolean askPermissionOnceAgain = false;
 
+        String a;//위도
+        String b;//경도
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -79,6 +81,8 @@ public class map extends AppCompatActivity
             MapFragment mapFragment = (MapFragment) getFragmentManager()
                     .findFragmentById(R.id.map);
             mapFragment.getMapAsync(this);
+
+
         }
 
 
@@ -167,6 +171,18 @@ public class map extends AppCompatActivity
             //mGoogleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
             mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
 
+            //마커 클릭 리스너
+            mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker) {
+                    //Toast.makeText(getApplicationContext(),a,Toast.LENGTH_SHORT).show();
+                    String[] arr = {a,b};
+                    Toast.makeText(getApplicationContext(),arr[0]+" "+arr[1],Toast.LENGTH_SHORT).show();
+
+                    return false;
+                }
+            });
+
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 //API 23 이상이면 런타임 퍼미션 처리 필요
@@ -214,7 +230,8 @@ public class map extends AppCompatActivity
             String markerTitle = getCurrentAddress(location);
             String markerSnippet = "위도:"+String.valueOf(location.getLatitude())
                     + " 경도:"+String.valueOf(location.getLongitude());
-
+            a = String.valueOf(location.getLatitude());
+            b = String.valueOf(location.getLongitude());
             //현재 위치에 마커 생성
             setCurrentLocation(location, markerTitle, markerSnippet );
         }
