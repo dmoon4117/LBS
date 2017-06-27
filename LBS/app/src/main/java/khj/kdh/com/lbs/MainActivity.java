@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "액티비티 전환", Toast.LENGTH_LONG).show();
+                // Toast.makeText(getApplicationContext(), "액티비티 전환", Toast.LENGTH_LONG).show();
 
                 // 액티비티 전환 코드
                 Intent intent = new Intent(getApplicationContext(), map.class);
@@ -60,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         myThread thread = new myThread();
         //getServiceList();
         thread.setDaemon(true);
-        thread.start();
+     //   thread.start();
     }
 
     void getServiceList()	{
